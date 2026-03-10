@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard 💕 — Love Gallery Admin</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💕</text></svg>" />
+</head>
+<body>
+
+  <!-- Floating Hearts -->
+  <div class="floating-hearts" aria-hidden="true"></div>
+
+  <!-- ─── Delete Confirm Modal ─── -->
+  <div class="modal-overlay hidden" id="delete-modal" role="dialog" aria-modal="true">
+    <div class="modal">
+      <span class="modal-icon">🗑</span>
+      <div class="modal-title">Delete this photo?</div>
+      <p class="modal-text">
+        "<strong id="delete-photo-title"></strong>" will be permanently removed from the gallery and storage.
+      </p>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="cancel-delete">Cancel</button>
+        <button class="btn btn-danger"    id="confirm-delete">💔 Yes, Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-wrapper">
+
+    <!-- ─── Header ─── -->
+    <header class="site-header">
+      <div class="header-inner">
+        <div style="display:flex;align-items:center;gap:0.75rem">
+          <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
+          <a href="index.html" class="site-logo">
+            <span class="heart-icon">💕</span>
+            Love Gallery
+          </a>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.75rem">
+          <span style="font-size:0.8rem;color:var(--text-light);display:none" id="user-email" class="desktop-only"></span>
+          <a href="index.html" class="nav-link" style="font-size:0.85rem">View Gallery</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ─── Dashboard Layout ─── -->
+    <div class="dashboard-layout">
+
+      <!-- Mobile Sidebar Overlay -->
+      <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+      <!-- ─── Sidebar ─── -->
+      <aside class="sidebar" id="sidebar">
+
+        <div style="padding:0.5rem 0.8rem 1rem;border-bottom:1px solid var(--pink-soft);margin-bottom:0.5rem">
+          <div style="font-family:'Dancing Script',cursive;font-size:1.2rem;color:var(--pink-deep);font-weight:700">
+            💕 Admin Panel
+          </div>
+          <div style="font-size:0.75rem;color:var(--text-light);margin-top:0.2rem" id="user-email">
+            Logged in
+          </div>
+        </div>
+
+        <span class="sidebar-section-label">Navigation</span>
+
+        <button class="sidebar-link active" data-tab="tab-upload">
+          <span class="icon">📸</span> Upload Photo
+        </button>
+        <button class="sidebar-link" data-tab="tab-manage">
+          <span class="icon">🖼</span> Manage Photos
+        </button>
+
+        <div class="sidebar-bottom">
+          <button class="sidebar-link" id="logout-btn" style="color:#e74c3c">
+            <span class="icon">🚪</span> Sign Out
+          </button>
+        </div>
+
+      </aside>
+
+      <!-- ─── Main Content ─── -->
+      <main class="main-content">
+
+        <!-- ═══ Tab: Upload ═══ -->
+        <div class="tab-content" id="tab-upload">
+
+          <div class="content-header">
+            <h1 class="content-title">📸 Upload a Memory</h1>
+            <p class="content-subtitle">Add a beautiful new photo to the love gallery</p>
+          </div>
+
+          <!-- Stats -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon">🖼</div>
+              <div class="stat-number" id="total-photos">—</div>
+              <div class="stat-label">Total Photos</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">💕</div>
+              <div class="stat-number">∞</div>
+              <div class="stat-label">Memories</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">🌸</div>
+              <div class="stat-number">1</div>
+              <div class="stat-label">Gallery</div>
+            </div>
+          </div>
+
+          <!-- Upload Zone -->
+          <div class="upload-zone">
+            <div class="upload-zone-title">
+              💖 Upload New Photo
+            </div>
+
+            <!-- Alert -->
+            <div class="alert alert-error hidden" id="upload-alert" role="alert"></div>
+
+            <!-- Dropzone -->
+            <div class="dropzone" id="dropzone">
+              <input
+                type="file"
+                id="file-input"
+                accept="image/*"
+                aria-label="Choose photo to upload"
+              />
+              <span class="dropzone-icon">📷</span>
+              <h3>Drop your photo here</h3>
+              <p>or click to browse &nbsp;·&nbsp; JPG, PNG, GIF, WEBP</p>
+            </div>
+
+            <!-- Preview & Form -->
+            <div class="preview-wrap" id="preview-wrap">
+              <img class="preview-img" id="preview-img" src="" alt="Preview" />
+              <div class="preview-form">
+                <div class="form-group" style="margin-bottom:0.8rem">
+                  <label class="form-label" for="photo-title">Photo Title</label>
+                  <input
+                    type="text"
+                    id="photo-title"
+                    class="form-input"
+                    placeholder="Give this memory a sweet name…"
+                    maxlength="80"
+                  />
+                </div>
+
+                <div class="upload-actions">
+                  <button class="btn btn-primary" id="upload-btn">
+                    💖 Upload Photo
+                  </button>
+                  <button class="btn btn-secondary" id="cancel-btn">
+                    Cancel
+                  </button>
+                </div>
+
+                <!-- Progress -->
+                <div class="progress-bar-wrap" id="progress-wrap">
+                  <div class="progress-bar-track">
+                    <div class="progress-bar-fill" id="progress-fill"></div>
+                  </div>
+                  <div class="progress-label" id="progress-label">Uploading…</div>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /upload-zone -->
+
+          <!-- Tips -->
+          <div style="background:var(--white);border-radius:18px;padding:1.5rem;box-shadow:var(--shadow-sm)">
+            <div style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--text-dark);margin-bottom:0.8rem">
+              💡 Upload Tips
+            </div>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:0.4rem">
+              <li style="font-size:0.85rem;color:var(--text-light)">🌸 &nbsp; Supported formats: JPG, PNG, GIF, WEBP</li>
+              <li style="font-size:0.85rem;color:var(--text-light)">💕 &nbsp; Drag & drop or click to select a file</li>
+              <li style="font-size:0.85rem;color:var(--text-light)">✨ &nbsp; Give each photo a meaningful title</li>
+              <li style="font-size:0.85rem;color:var(--text-light)">💗 &nbsp; Photos appear instantly in the public gallery</li>
+            </ul>
+          </div>
+
+        </div><!-- /tab-upload -->
+
+        <!-- ═══ Tab: Manage ═══ -->
+        <div class="tab-content hidden" id="tab-manage">
+
+          <div class="content-header">
+            <h1 class="content-title">🖼 Manage Photos</h1>
+            <p class="content-subtitle">View and delete your uploaded memories</p>
+          </div>
+
+          <div class="admin-gallery">
+            <div class="admin-gallery-title">
+              💕 Your Photos
+            </div>
+            <div class="admin-photo-grid" id="admin-photo-grid">
+              <!-- Injected by JS -->
+              <div style="grid-column:1/-1;display:flex;justify-content:center;padding:3rem">
+                <div class="spinner"></div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /tab-manage -->
+
+      </main>
+    </div><!-- /dashboard-layout -->
+
+  </div><!-- /page-wrapper -->
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

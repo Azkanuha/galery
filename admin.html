@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login 💕 — Love Gallery</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💕</text></svg>" />
+</head>
+<body>
+
+  <!-- Floating Hearts -->
+  <div class="floating-hearts" aria-hidden="true"></div>
+
+  <div class="page-wrapper">
+
+    <!-- ─── Header ─── -->
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="index.html" class="site-logo">
+          <span class="heart-icon">💕</span>
+          Love Gallery
+        </a>
+        <nav class="nav-links">
+          <a href="index.html" class="nav-link">← Gallery</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- ─── Login Form ─── -->
+    <div class="auth-page">
+      <div class="auth-card">
+
+        <div class="auth-logo">Love Gallery</div>
+        <p class="auth-tagline">Admin Portal — Your special place ✨</p>
+        <div class="auth-hearts">💗 &nbsp; 💕 &nbsp; 💖</div>
+
+        <!-- Alert -->
+        <div class="alert alert-error hidden" id="login-alert" role="alert"></div>
+
+        <form id="login-form" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              class="form-input"
+              placeholder="your@email.com"
+              autocomplete="email"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              class="form-input"
+              placeholder="••••••••"
+              autocomplete="current-password"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="login-btn" style="width:100%;justify-content:center;margin-top:0.5rem">
+            ✨ Sign In
+          </button>
+        </form>
+
+        <div style="margin-top:1.5rem;font-size:0.8rem;color:var(--text-light);font-family:'Dancing Script',cursive;font-size:1rem">
+          Only for authorized admins 🌸
+        </div>
+
+        <a href="index.html" style="display:block;margin-top:1rem;font-size:0.85rem;color:var(--text-light);text-decoration:none;transition:all 0.2s" onmouseover="this.style.color='var(--pink-deep)'" onmouseout="this.style.color='var(--text-light)'">
+          ← Back to the gallery
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

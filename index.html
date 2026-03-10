@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Love Gallery 💕 — A Place for Beautiful Memories</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💕</text></svg>" />
+</head>
+<body>
+
+  <!-- Floating Hearts -->
+  <div class="floating-hearts" aria-hidden="true"></div>
+
+  <!-- Lightbox -->
+  <div class="lightbox hidden" id="lightbox" role="dialog" aria-modal="true">
+    <button class="lightbox-close" id="lb-close" aria-label="Close">✕</button>
+    <div class="lightbox-content">
+      <img class="lightbox-img" id="lb-img" src="" alt="" />
+      <div class="lightbox-caption" id="lb-caption"></div>
+    </div>
+  </div>
+
+  <div class="page-wrapper">
+
+    <!-- ─── Header ─── -->
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="index.html" class="site-logo">
+          <span class="heart-icon">💕</span>
+          Love Gallery
+        </a>
+        <nav class="nav-links">
+          <a href="index.html" class="nav-link active">Gallery</a>
+          <a href="admin.html" class="nav-link">Admin ✨</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- ─── Hero ─── -->
+    <section class="hero" aria-label="Hero">
+      <div class="hero-badge">💗 &nbsp; Capturing Love Stories</div>
+      <h1 class="hero-title">
+        A Gallery Full of<br><span>Beautiful Memories</span>
+      </h1>
+      <p class="hero-subtitle">Every photo tells a love story worth remembering ✨</p>
+
+      <div class="hero-divider">
+        <span style="font-size:1.4rem">Keisya</span>
+      </div>
+    </section>
+
+    <!-- ─── Gallery ─── -->
+    <main class="gallery-section" id="main-gallery">
+      <div class="section-header">
+        <h2 class="section-title">
+          🌸 Our Memories
+        </h2>
+        <span class="photo-count" id="photo-count">Loading…</span>
+      </div>
+
+      <div class="gallery-grid" id="gallery-grid">
+        <!-- Injected by JS -->
+      </div>
+    </main>
+
+    <!-- ─── Footer ─── -->
+    <footer class="site-footer">
+      Made with <span></span>  Love Gallery &copy; 2025
+    </footer>
+
+  </div>
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
