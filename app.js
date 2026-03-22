@@ -1,27 +1,35 @@
 // ============================================================
-//  LOVE GALLERY — Supabase App Logic
+//  NEKO GALLERY — Supabase App Logic (Cat Theme Edition)
 // ============================================================
 
-const SUPABASE_URL     = 'https://keywzgycwejmmivggaio.supabase.co';
+const SUPABASE_URL      = 'https://keywzgycwejmmivggaio.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_Qbfilopd9AvK60NIWE8M_w_3V00_8Nr';
 
-// ─── Init Supabase Client ───────────────────────────────────
 const { createClient } = supabase;
 const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// ─── Floating Hearts Animation ──────────────────────────────
+// ─── Cat Loader Dismiss ─────────────────────────────────────
+function dismissLoader() {
+  const loader = document.getElementById('cat-loader');
+  if (!loader) return;
+  loader.classList.add('fade-out');
+  setTimeout(() => loader.remove(), 520);
+}
+
+// ─── Floating Paws Animation ────────────────────────────────
 function initFloatingHearts() {
   const container = document.querySelector('.floating-hearts');
   if (!container) return;
-  const hearts = ['💗','💕','💖','💝','💓','🌸','✨'];
-  for (let i = 0; i < 18; i++) {
+
+  const pawEmojis = ['🐾', '🐱', '😸', '🐾', '🐾', '😺', '🐾', '✨', '🌸'];
+  for (let i = 0; i < 20; i++) {
     const el = document.createElement('div');
     el.classList.add('heart-particle');
-    el.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-    el.style.left     = Math.random() * 100 + 'vw';
-    el.style.fontSize = (0.7 + Math.random() * 1.2) + 'rem';
-    el.style.animationDuration  = (10 + Math.random() * 16) + 's';
-    el.style.animationDelay     = (Math.random() * 12) + 's';
+    el.textContent = pawEmojis[Math.floor(Math.random() * pawEmojis.length)];
+    el.style.left            = Math.random() * 100 + 'vw';
+    el.style.fontSize        = (0.65 + Math.random() * 1.1) + 'rem';
+    el.style.animationDuration = (11 + Math.random() * 18) + 's';
+    el.style.animationDelay  = (Math.random() * 14) + 's';
     container.appendChild(el);
   }
 }
@@ -34,7 +42,7 @@ function showToast(msg, type = 'default') {
     container.classList.add('toast-container');
     document.body.appendChild(container);
   }
-  const icons = { success: '💖', error: '💔', default: '🌸' };
+  const icons = { success: '😸', error: '😿', default: '🐾' };
   const toast = document.createElement('div');
   toast.classList.add('toast', type);
   toast.innerHTML = `<span>${icons[type] || icons.default}</span><span>${msg}</span>`;
@@ -54,8 +62,7 @@ function staggerCards(cards) {
 
 // ─── Format Date ────────────────────────────────────────────
 function formatDate(ts) {
-  const d = new Date(ts);
-  return d.toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+  return new Date(ts).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
 }
 
 // ============================================================
@@ -64,19 +71,21 @@ function formatDate(ts) {
 async function initGallery() {
   initFloatingHearts();
 
-  const grid        = document.getElementById('gallery-grid');
-  const countBadge  = document.getElementById('photo-count');
-  const lightbox    = document.getElementById('lightbox');
-  const lbImg       = document.getElementById('lb-img');
-  const lbCaption   = document.getElementById('lb-caption');
-  const lbClose     = document.getElementById('lb-close');
+  // Dismiss cat loader after a short delay so it plays
+  setTimeout(dismissLoader, 800);
+
+  const grid       = document.getElementById('gallery-grid');
+  const countBadge = document.getElementById('photo-count');
+  const lightbox   = document.getElementById('lightbox');
+  const lbImg      = document.getElementById('lb-img');
+  const lbCaption  = document.getElementById('lb-caption');
+  const lbClose    = document.getElementById('lb-close');
 
   if (!grid) return;
 
-  // Show loading
   grid.innerHTML = `
     <div class="loading-state">
-      <div class="spinner"></div>
+      <span class="spinner">🐱</span>
       <p>Loading memories…</p>
     </div>`;
 
@@ -88,7 +97,7 @@ async function initGallery() {
   if (error) {
     grid.innerHTML = `
       <div class="empty-state">
-        <span class="empty-icon">💔</span>
+        <span class="empty-icon">😿</span>
         <h3>Couldn't load photos</h3>
         <p>${error.message}</p>
       </div>`;
@@ -100,9 +109,9 @@ async function initGallery() {
   if (!photos.length) {
     grid.innerHTML = `
       <div class="empty-state">
-        <span class="empty-icon">💕</span>
+        <span class="empty-icon">🐱</span>
         <h3>No photos yet</h3>
-        <p>The gallery is waiting for beautiful memories…</p>
+        <p>The gallery is waiting for purr-fect memories…</p>
       </div>`;
     return;
   }
@@ -115,17 +124,16 @@ async function initGallery() {
       <div class="card-image-wrap">
         <img src="${photo.image_url}" alt="${photo.title}" loading="lazy" />
         <div class="card-overlay">
-          <span class="overlay-heart">💕</span>
+          <span class="overlay-icon">🐾</span>
         </div>
       </div>
       <div class="card-body">
         <div class="card-title">${photo.title}</div>
-        <div class="card-meta">🌸 ${formatDate(photo.created_at)}</div>
+        <div class="card-meta">🐾 ${formatDate(photo.created_at)}</div>
       </div>`;
 
-    // Lightbox open
     card.querySelector('.card-image-wrap').addEventListener('click', () => {
-      lbImg.src        = photo.image_url;
+      lbImg.src            = photo.image_url;
       lbCaption.textContent = photo.title;
       lightbox.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
@@ -136,21 +144,15 @@ async function initGallery() {
 
   staggerCards(grid.querySelectorAll('.photo-card'));
 
-  // Lightbox close
   function closeLightbox() {
     lightbox.classList.add('hidden');
     document.body.style.overflow = '';
     lbImg.src = '';
   }
 
-  if (lbClose) lbClose.addEventListener('click', closeLightbox);
-  if (lightbox) lightbox.addEventListener('click', e => {
-    if (e.target === lightbox) closeLightbox();
-  });
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeLightbox();
-  });
+  if (lbClose)  lbClose.addEventListener('click', closeLightbox);
+  if (lightbox) lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 }
 
 // ============================================================
@@ -159,7 +161,6 @@ async function initGallery() {
 async function initAdminLogin() {
   initFloatingHearts();
 
-  // Redirect if already logged in
   const { data: { session } } = await db.auth.getSession();
   if (session) { window.location.href = 'dashboard.html'; return; }
 
@@ -174,19 +175,18 @@ async function initAdminLogin() {
     const email    = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value;
     alertEl.classList.add('hidden');
-
-    btn.textContent = '💗 Signing in…';
+    btn.textContent = '🐾 Signing in…';
     btn.disabled = true;
 
     const { error } = await db.auth.signInWithPassword({ email, password });
 
     if (error) {
-      alertEl.textContent  = '💔 ' + error.message;
+      alertEl.textContent = '😿 ' + error.message;
       alertEl.classList.remove('hidden');
-      btn.textContent = '✨ Sign In';
+      btn.textContent = '🐾 Sign In';
       btn.disabled    = false;
     } else {
-      showToast('Welcome back! 💕', 'success');
+      showToast('Welcome back, Admin! 😸', 'success');
       setTimeout(() => window.location.href = 'dashboard.html', 600);
     }
   });
@@ -198,7 +198,6 @@ async function initAdminLogin() {
 async function initDashboard() {
   initFloatingHearts();
 
-  // Auth guard
   const { data: { session } } = await db.auth.getSession();
   if (!session) { window.location.href = 'admin.html'; return; }
 
@@ -214,7 +213,7 @@ async function initDashboard() {
     });
   }
 
-  // Sidebar mobile toggle
+  // Sidebar toggle
   const hamburger      = document.getElementById('hamburger');
   const sidebar        = document.getElementById('sidebar');
   const sidebarOverlay = document.getElementById('sidebar-overlay');
@@ -232,10 +231,10 @@ async function initDashboard() {
 
   // Tab switching
   const navBtns = document.querySelectorAll('.sidebar-link[data-tab]');
-  const tabs     = document.querySelectorAll('.tab-content');
+  const tabs    = document.querySelectorAll('.tab-content');
 
   function switchTab(id) {
-    tabs.forEach(t  => t.classList.toggle('hidden', t.id !== id));
+    tabs.forEach(t   => t.classList.toggle('hidden', t.id !== id));
     navBtns.forEach(b => b.classList.toggle('active', b.dataset.tab === id));
   }
 
@@ -254,7 +253,7 @@ async function initDashboard() {
       .select('*')
       .order('created_at', { ascending: false });
 
-    if (error) { showToast('Failed to load photos 💔', 'error'); return; }
+    if (error) { showToast('Failed to load photos 😿', 'error'); return; }
     allPhotos = data || [];
     renderAdminGrid();
     updateStats();
@@ -265,14 +264,16 @@ async function initDashboard() {
     if (el) el.textContent = allPhotos.length;
   }
 
+  function escAttr(s) { return s.replace(/'/g, "\\'").replace(/"/g, '&quot;'); }
+
   function renderAdminGrid() {
     const grid = document.getElementById('admin-photo-grid');
     if (!grid) return;
 
     if (!allPhotos.length) {
       grid.innerHTML = `
-        <div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-light)">
-          <div style="font-size:2.5rem;margin-bottom:0.7rem">💕</div>
+        <div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-light);font-weight:700">
+          <div style="font-size:2.5rem;margin-bottom:0.7rem;animation:catBounce 0.55s cubic-bezier(0.34,1.56,0.64,1) infinite alternate">🐱</div>
           <p>No photos yet. Upload your first memory!</p>
         </div>`;
       return;
@@ -287,11 +288,12 @@ async function initDashboard() {
         <img class="admin-card-img" src="${photo.image_url}" alt="${photo.title}" loading="lazy" />
         <div class="admin-card-body">
           <div class="admin-card-title">${photo.title}</div>
-          <div style="font-size:0.72rem;color:var(--text-light);margin-bottom:0.6rem">
-            🌸 ${formatDate(photo.created_at)}
+          <div style="font-size:0.72rem;font-weight:700;color:var(--text-muted);margin-bottom:0.6rem">
+            🐾 ${formatDate(photo.created_at)}
           </div>
-          <button class="btn btn-danger btn-sm" onclick="confirmDelete('${photo.id}', '${escAttr(photo.title)}', '${escAttr(photo.image_url)}')">
-            🗑 Delete
+          <button class="btn btn-danger btn-sm"
+            onclick="confirmDelete('${photo.id}','${escAttr(photo.title)}','${escAttr(photo.image_url)}')">
+            😿 Delete
           </button>
         </div>`;
       grid.appendChild(card);
@@ -300,75 +302,64 @@ async function initDashboard() {
     staggerCards(grid.querySelectorAll('.admin-photo-card'));
   }
 
-  function escAttr(s) { return s.replace(/'/g, "\\'").replace(/"/g, '&quot;'); }
-
   // ─ Upload logic ─
-  const dropzone   = document.getElementById('dropzone');
-  const fileInput  = document.getElementById('file-input');
-  const previewWrap = document.getElementById('preview-wrap');
-  const previewImg = document.getElementById('preview-img');
-  const titleInput = document.getElementById('photo-title');
-  const uploadBtn  = document.getElementById('upload-btn');
-  const cancelBtn  = document.getElementById('cancel-btn');
+  const dropzone     = document.getElementById('dropzone');
+  const fileInput    = document.getElementById('file-input');
+  const previewWrap  = document.getElementById('preview-wrap');
+  const previewImg   = document.getElementById('preview-img');
+  const titleInput   = document.getElementById('photo-title');
+  const uploadBtn    = document.getElementById('upload-btn');
+  const cancelBtn    = document.getElementById('cancel-btn');
   const progressWrap = document.getElementById('progress-wrap');
   const progressFill = document.getElementById('progress-fill');
   const progressLabel = document.getElementById('progress-label');
-  const uploadAlert  = document.getElementById('upload-alert');
 
   let selectedFile = null;
 
   function showPreview(file) {
     selectedFile = file;
-    const url = URL.createObjectURL(file);
-    previewImg.src = url;
+    previewImg.src = URL.createObjectURL(file);
     previewWrap.classList.add('visible');
-    // Auto-fill title from filename
     if (!titleInput.value) {
       titleInput.value = file.name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
     }
   }
 
   function clearUpload() {
-    selectedFile = null;
+    selectedFile    = null;
     fileInput.value = '';
-    previewImg.src = '';
+    previewImg.src  = '';
     previewWrap.classList.remove('visible');
     progressWrap.classList.remove('visible');
     titleInput.value = '';
-    if (uploadAlert) uploadAlert.classList.add('hidden');
   }
 
-  // Drag & Drop
-  ['dragenter','dragover'].forEach(evt => {
-    dropzone.addEventListener(evt, e => { e.preventDefault(); dropzone.classList.add('dragover'); });
+  ['dragenter','dragover'].forEach(ev => {
+    dropzone.addEventListener(ev, e => { e.preventDefault(); dropzone.classList.add('dragover'); });
   });
-  ['dragleave','drop'].forEach(evt => {
-    dropzone.addEventListener(evt, e => {
+  ['dragleave','drop'].forEach(ev => {
+    dropzone.addEventListener(ev, e => {
       e.preventDefault();
       dropzone.classList.remove('dragover');
-      if (evt === 'drop' && e.dataTransfer.files[0]) showPreview(e.dataTransfer.files[0]);
+      if (ev === 'drop' && e.dataTransfer.files[0]) showPreview(e.dataTransfer.files[0]);
     });
   });
 
-  fileInput.addEventListener('change', e => {
-    if (e.target.files[0]) showPreview(e.target.files[0]);
-  });
-
+  fileInput.addEventListener('change', e => { if (e.target.files[0]) showPreview(e.target.files[0]); });
   if (cancelBtn) cancelBtn.addEventListener('click', clearUpload);
 
   if (uploadBtn) {
     uploadBtn.addEventListener('click', async () => {
-      if (!selectedFile) { showToast('Please select a photo first 📸', 'error'); return; }
-      const title = titleInput.value.trim();
-      if (!title) { showToast('Please add a title 💕', 'error'); return; }
+      if (!selectedFile)           { showToast('Please select a photo first 🐱', 'error'); return; }
+      if (!titleInput.value.trim()) { showToast('Please add a title 🐾', 'error'); return; }
 
-      uploadBtn.disabled = true;
-      uploadBtn.textContent = '💗 Uploading…';
+      const title = titleInput.value.trim();
+      uploadBtn.disabled  = true;
+      uploadBtn.textContent = '🐾 Uploading…';
       progressWrap.classList.add('visible');
       progressFill.style.width = '20%';
       progressLabel.textContent = 'Uploading to storage…';
 
-      // Upload to Supabase Storage
       const ext      = selectedFile.name.split('.').pop();
       const filename = `photo_${Date.now()}.${ext}`;
 
@@ -378,53 +369,49 @@ async function initDashboard() {
 
       if (storageErr) {
         showToast('Upload failed: ' + storageErr.message, 'error');
-        uploadBtn.disabled  = false;
-        uploadBtn.textContent = '💖 Upload Photo';
+        uploadBtn.disabled    = false;
+        uploadBtn.textContent = '🐾 Upload Photo';
         progressWrap.classList.remove('visible');
         return;
       }
 
-      progressFill.style.width = '70%';
+      progressFill.style.width  = '70%';
       progressLabel.textContent = 'Saving to database…';
 
-      // Get public URL
-      const { data: { publicUrl } } = db.storage
-        .from('photos')
-        .getPublicUrl(filename);
+      const { data: { publicUrl } } = db.storage.from('photos').getPublicUrl(filename);
 
-      // Save to DB
       const { error: dbErr } = await db
         .from('photo')
         .insert([{ title, image_url: publicUrl }]);
 
       if (dbErr) {
         showToast('DB error: ' + dbErr.message, 'error');
-        uploadBtn.disabled  = false;
-        uploadBtn.textContent = '💖 Upload Photo';
+        uploadBtn.disabled    = false;
+        uploadBtn.textContent = '🐾 Upload Photo';
         progressFill.style.width = '0%';
         return;
       }
 
-      progressFill.style.width = '100%';
-      progressLabel.textContent = 'Done! 💕';
-      showToast('Photo uploaded successfully! 💖', 'success');
+      progressFill.style.width  = '100%';
+      progressLabel.textContent = 'Purr-fect! 😸';
+      showToast('Photo uploaded! 😸', 'success');
 
       setTimeout(() => {
         clearUpload();
-        uploadBtn.disabled  = false;
-        uploadBtn.textContent = '💖 Upload Photo';
+        uploadBtn.disabled    = false;
+        uploadBtn.textContent = '🐾 Upload Photo';
         loadPhotos();
         switchTab('tab-manage');
-      }, 1000);
+      }, 900);
     });
   }
 
   // ─ Delete logic ─
-  const deleteModal    = document.getElementById('delete-modal');
-  const deleteTitle    = document.getElementById('delete-photo-title');
-  const confirmDelBtn  = document.getElementById('confirm-delete');
-  const cancelDelBtn   = document.getElementById('cancel-delete');
-  let pendingDelete    = null;
+  const deleteModal   = document.getElementById('delete-modal');
+  const deleteTitle   = document.getElementById('delete-photo-title');
+  const confirmDelBtn = document.getElementById('confirm-delete');
+  const cancelDelBtn  = document.getElementById('cancel-delete');
+  let pendingDelete   = null;
 
   window.confirmDelete = function(id, title, imageUrl) {
     pendingDelete = { id, imageUrl };
@@ -443,34 +430,24 @@ async function initDashboard() {
       deleteModal.classList.add('hidden');
       confirmDelBtn.disabled = true;
 
-      // Extract filename from URL
       const urlParts = pendingDelete.imageUrl.split('/photos/');
       const filename = urlParts[1];
+      if (filename) await db.storage.from('photos').remove([filename]);
 
-      // Delete from storage
-      if (filename) {
-        await db.storage.from('photos').remove([filename]);
-      }
-
-      // Delete from DB
-      const { error } = await db
-        .from('photo')
-        .delete()
-        .eq('id', pendingDelete.id);
+      const { error } = await db.from('photo').delete().eq('id', pendingDelete.id);
 
       if (error) {
         showToast('Delete failed: ' + error.message, 'error');
       } else {
-        showToast('Photo removed 🌸', 'success');
+        showToast('Photo removed 🐾', 'success');
         loadPhotos();
       }
 
-      pendingDelete    = null;
+      pendingDelete         = null;
       confirmDelBtn.disabled = false;
     });
   }
 
-  // ─ Init ─
   await loadPhotos();
 }
 
