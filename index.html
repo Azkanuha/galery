@@ -3,16 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Love Gallery 💕 — A Place for Beautiful Memories</title>
+  <title>Neko Gallery 🐱 — Capture Every Purr-fect Moment</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💕</text></svg>" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
 </head>
 <body>
 
-  <!-- Floating Hearts -->
+  <!-- ─── Cat Loader ─── -->
+  <div class="cat-loader" id="cat-loader">
+    <div class="loader-cat">🐱</div>
+    <div class="loader-dots">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="loader-text">Loading gallery…</div>
+  </div>
+
+  <!-- ─── Floating Paws ─── -->
   <div class="floating-hearts" aria-hidden="true"></div>
 
-  <!-- Lightbox -->
+  <!-- ─── Lightbox ─── -->
   <div class="lightbox hidden" id="lightbox" role="dialog" aria-modal="true">
     <button class="lightbox-close" id="lb-close" aria-label="Close">✕</button>
     <div class="lightbox-content">
@@ -27,35 +36,42 @@
     <header class="site-header">
       <div class="header-inner">
         <a href="index.html" class="site-logo">
-          <span class="heart-icon">💕</span>
-          Love Gallery
+          <span class="logo-cat">🐱</span>
+          Neko Gallery
         </a>
         <nav class="nav-links">
-          <a href="index.html" class="nav-link active">Gallery</a>
-          <a href="admin.html" class="nav-link">Admin ✨</a>
+          <a href="index.html" class="nav-link active">🐾 Gallery</a>
+          <a href="admin.html" class="nav-link">✨ Admin</a>
         </nav>
       </div>
     </header>
 
     <!-- ─── Hero ─── -->
     <section class="hero" aria-label="Hero">
-      <div class="hero-badge">💗 &nbsp; Capturing Love Stories</div>
-      <h1 class="hero-title">
-        A Gallery Full of<br><span>Beautiful Memories</span>
-      </h1>
-      <p class="hero-subtitle">Every photo tells a love story worth remembering ✨</p>
+      <div class="hero-badge">🐾 &nbsp; Purr-fect Photo Collection</div>
 
-      <div class="hero-divider">
-        <span style="font-size:1.4rem">Hi</span>
+      <h1 class="hero-title">
+        Every Photo is a<br><span>Purr-fect Memory</span>
+      </h1>
+
+      <p class="hero-subtitle">A cozy gallery for all your adorable moments 🐾</p>
+
+      <!-- Whisker decoration -->
+      <div class="hero-whiskers">
+        <span class="whisker whisker-l"></span>
+        <span style="font-size:1.4rem">🐱</span>
+        <span class="whisker whisker-r"></span>
+      </div>
+
+      <div class="paw-divider">
+        <span>🐾</span>
       </div>
     </section>
 
     <!-- ─── Gallery ─── -->
     <main class="gallery-section" id="main-gallery">
       <div class="section-header">
-        <h2 class="section-title">
-          🌸 Our Memories
-        </h2>
+        <h2 class="section-title">🖼 Our Memories</h2>
         <span class="photo-count" id="photo-count">Loading…</span>
       </div>
 
@@ -66,12 +82,11 @@
 
     <!-- ─── Footer ─── -->
     <footer class="site-footer">
-      Made with <span></span>  Love Gallery &copy; 2025
+      Made with <span>🐾</span> and lots of purrs — Neko Gallery &copy; 2025
     </footer>
 
-  </div>
+  </div><!-- /page-wrapper -->
 
-  <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="app.js"></script>
 </body>
