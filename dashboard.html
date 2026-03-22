@@ -3,26 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard 💕 — Love Gallery Admin</title>
+  <title>Dashboard 🐾 — Neko Gallery Admin</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💕</text></svg>" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>" />
 </head>
 <body>
 
-  <!-- Floating Hearts -->
+  <!-- ─── Floating Paws ─── -->
   <div class="floating-hearts" aria-hidden="true"></div>
 
   <!-- ─── Delete Confirm Modal ─── -->
   <div class="modal-overlay hidden" id="delete-modal" role="dialog" aria-modal="true">
     <div class="modal">
-      <span class="modal-icon">🗑</span>
-      <div class="modal-title">Delete this photo?</div>
+      <span class="modal-icon">😿</span>
+      <div class="modal-title">Remove this photo?</div>
       <p class="modal-text">
         "<strong id="delete-photo-title"></strong>" will be permanently removed from the gallery and storage.
       </p>
       <div class="modal-actions">
-        <button class="btn btn-secondary" id="cancel-delete">Cancel</button>
-        <button class="btn btn-danger"    id="confirm-delete">💔 Yes, Delete</button>
+        <button class="btn btn-secondary" id="cancel-delete">🐱 Keep it</button>
+        <button class="btn btn-danger"    id="confirm-delete">🗑 Yes, Remove</button>
       </div>
     </div>
   </div>
@@ -33,15 +33,14 @@
     <header class="site-header">
       <div class="header-inner">
         <div style="display:flex;align-items:center;gap:0.75rem">
-          <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
+          <button class="hamburger" id="hamburger" aria-label="Menu">🐾</button>
           <a href="index.html" class="site-logo">
-            <span class="heart-icon">💕</span>
-            Love Gallery
+            <span class="logo-cat">🐱</span>
+            Neko Gallery
           </a>
         </div>
         <div style="display:flex;align-items:center;gap:0.75rem">
-          <span style="font-size:0.8rem;color:var(--text-light);display:none" id="user-email" class="desktop-only"></span>
-          <a href="index.html" class="nav-link" style="font-size:0.85rem">View Gallery</a>
+          <a href="index.html" class="nav-link" style="font-size:0.85rem">🖼 View Gallery</a>
         </div>
       </div>
     </header>
@@ -55,12 +54,26 @@
       <!-- ─── Sidebar ─── -->
       <aside class="sidebar" id="sidebar">
 
-        <div style="padding:0.5rem 0.8rem 1rem;border-bottom:1px solid var(--pink-soft);margin-bottom:0.5rem">
-          <div style="font-family:'Dancing Script',cursive;font-size:1.2rem;color:var(--pink-deep);font-weight:700">
-            💕 Admin Panel
-          </div>
-          <div style="font-size:0.75rem;color:var(--text-light);margin-top:0.2rem" id="user-email">
-            Logged in
+        <!-- Profile pill -->
+        <div style="
+          padding: 0.8rem 1rem 1rem;
+          border-bottom: 2px solid var(--sand);
+          margin-bottom: 0.5rem;
+        ">
+          <div style="
+            display:flex;
+            align-items:center;
+            gap:0.6rem;
+            background:var(--beige);
+            border-radius:14px;
+            padding:0.6rem 0.8rem;
+            border:1.5px solid var(--sand);
+          ">
+            <span style="font-size:1.6rem;animation:catWiggle 3s ease-in-out infinite">🐱</span>
+            <div>
+              <div style="font-family:'Fredoka One',cursive;font-size:1rem;color:var(--cat-rose)">Admin Paw</div>
+              <div style="font-size:0.72rem;font-weight:700;color:var(--text-muted)" id="user-email">Logged in</div>
+            </div>
           </div>
         </div>
 
@@ -73,8 +86,19 @@
           <span class="icon">🖼</span> Manage Photos
         </button>
 
+        <!-- Paw trail decoration -->
+        <div style="
+          padding:1rem 0;
+          text-align:center;
+          font-size:0.7rem;
+          color:var(--text-muted);
+          letter-spacing:4px;
+          opacity:0.4;
+          margin:auto 0;
+        ">🐾 &nbsp; 🐾 &nbsp; 🐾</div>
+
         <div class="sidebar-bottom">
-          <button class="sidebar-link" id="logout-btn" style="color:#e74c3c">
+          <button class="sidebar-link" id="logout-btn" style="color:#e87070">
             <span class="icon">🚪</span> Sign Out
           </button>
         </div>
@@ -89,7 +113,7 @@
 
           <div class="content-header">
             <h1 class="content-title">📸 Upload a Memory</h1>
-            <p class="content-subtitle">Add a beautiful new photo to the love gallery</p>
+            <p class="content-subtitle">Add a new purr-fect photo to Neko Gallery 🐾</p>
           </div>
 
           <!-- Stats -->
@@ -100,12 +124,12 @@
               <div class="stat-label">Total Photos</div>
             </div>
             <div class="stat-card">
-              <div class="stat-icon">💕</div>
+              <div class="stat-icon">🐾</div>
               <div class="stat-number">∞</div>
               <div class="stat-label">Memories</div>
             </div>
             <div class="stat-card">
-              <div class="stat-icon">🌸</div>
+              <div class="stat-icon">😸</div>
               <div class="stat-number">1</div>
               <div class="stat-label">Gallery</div>
             </div>
@@ -114,21 +138,15 @@
           <!-- Upload Zone -->
           <div class="upload-zone">
             <div class="upload-zone-title">
-              💖 Upload New Photo
+              🐾 Upload New Photo
             </div>
 
-            <!-- Alert -->
             <div class="alert alert-error hidden" id="upload-alert" role="alert"></div>
 
             <!-- Dropzone -->
             <div class="dropzone" id="dropzone">
-              <input
-                type="file"
-                id="file-input"
-                accept="image/*"
-                aria-label="Choose photo to upload"
-              />
-              <span class="dropzone-icon">📷</span>
+              <input type="file" id="file-input" accept="image/*" aria-label="Choose photo to upload" />
+              <span class="dropzone-icon">🐱</span>
               <h3>Drop your photo here</h3>
               <p>or click to browse &nbsp;·&nbsp; JPG, PNG, GIF, WEBP</p>
             </div>
@@ -138,26 +156,25 @@
               <img class="preview-img" id="preview-img" src="" alt="Preview" />
               <div class="preview-form">
                 <div class="form-group" style="margin-bottom:0.8rem">
-                  <label class="form-label" for="photo-title">Photo Title</label>
+                  <label class="form-label" for="photo-title">🏷 Photo Title</label>
                   <input
                     type="text"
                     id="photo-title"
                     class="form-input"
-                    placeholder="Give this memory a sweet name…"
+                    placeholder="Give this memory a cute name…"
                     maxlength="80"
                   />
                 </div>
 
                 <div class="upload-actions">
                   <button class="btn btn-primary" id="upload-btn">
-                    💖 Upload Photo
+                    🐾 Upload Photo
                   </button>
                   <button class="btn btn-secondary" id="cancel-btn">
                     Cancel
                   </button>
                 </div>
 
-                <!-- Progress -->
                 <div class="progress-bar-wrap" id="progress-wrap">
                   <div class="progress-bar-track">
                     <div class="progress-bar-fill" id="progress-fill"></div>
@@ -166,20 +183,25 @@
                 </div>
               </div>
             </div>
-
-          </div><!-- /upload-zone -->
+          </div>
 
           <!-- Tips -->
-          <div style="background:var(--white);border-radius:18px;padding:1.5rem;box-shadow:var(--shadow-sm)">
-            <div style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--text-dark);margin-bottom:0.8rem">
-              💡 Upload Tips
+          <div style="
+            background:var(--white);
+            border-radius:18px;
+            padding:1.5rem;
+            box-shadow:var(--shadow-xs);
+            border:2px solid var(--beige);
+          ">
+            <div style="font-family:'Fredoka One',cursive;font-size:1.1rem;color:var(--text-dark);margin-bottom:0.8rem">
+              😸 Upload Tips
             </div>
-            <ul style="list-style:none;display:flex;flex-direction:column;gap:0.4rem">
-              <li style="font-size:0.85rem;color:var(--text-light)">🌸 &nbsp; Supported formats: JPG, PNG, GIF, WEBP</li>
-              <li style="font-size:0.85rem;color:var(--text-light)">💕 &nbsp; Drag & drop or click to select a file</li>
-              <li style="font-size:0.85rem;color:var(--text-light)">✨ &nbsp; Give each photo a meaningful title</li>
-              <li style="font-size:0.85rem;color:var(--text-light)">💗 &nbsp; Photos appear instantly in the public gallery</li>
-            </ul>
+            <div style="display:flex;flex-direction:column;gap:0.4rem">
+              <p style="font-size:0.85rem;font-weight:600;color:var(--text-light)">🐾 &nbsp; Supported: JPG, PNG, GIF, WEBP</p>
+              <p style="font-size:0.85rem;font-weight:600;color:var(--text-light)">🐱 &nbsp; Drag & drop or click to select</p>
+              <p style="font-size:0.85rem;font-weight:600;color:var(--text-light)">✨ &nbsp; Give each photo a meaningful title</p>
+              <p style="font-size:0.85rem;font-weight:600;color:var(--text-light)">😸 &nbsp; Photos appear instantly in the gallery</p>
+            </div>
           </div>
 
         </div><!-- /tab-upload -->
@@ -189,17 +211,17 @@
 
           <div class="content-header">
             <h1 class="content-title">🖼 Manage Photos</h1>
-            <p class="content-subtitle">View and delete your uploaded memories</p>
+            <p class="content-subtitle">View and delete your uploaded memories 🐾</p>
           </div>
 
           <div class="admin-gallery">
             <div class="admin-gallery-title">
-              💕 Your Photos
+              🐾 Your Photos
             </div>
             <div class="admin-photo-grid" id="admin-photo-grid">
-              <!-- Injected by JS -->
-              <div style="grid-column:1/-1;display:flex;justify-content:center;padding:3rem">
-                <div class="spinner"></div>
+              <div style="grid-column:1/-1;display:flex;flex-direction:column;align-items:center;padding:3rem;gap:1rem;color:var(--text-light);font-weight:700">
+                <span style="font-size:2.5rem;animation:catBounce 0.55s cubic-bezier(0.34,1.56,0.64,1) infinite alternate">🐱</span>
+                <span>Loading photos…</span>
               </div>
             </div>
           </div>
@@ -207,11 +229,10 @@
         </div><!-- /tab-manage -->
 
       </main>
-    </div><!-- /dashboard-layout -->
+    </div>
 
   </div><!-- /page-wrapper -->
 
-  <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="app.js"></script>
 </body>
