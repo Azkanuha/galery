@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Login 💕 — Love Gallery</title>
+  <title>Admin Login 🐾 — Neko Gallery</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💕</text></svg>" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>" />
 </head>
 <body>
 
-  <!-- Floating Hearts -->
+  <!-- ─── Floating Paws ─── -->
   <div class="floating-hearts" aria-hidden="true"></div>
 
   <div class="page-wrapper">
@@ -18,29 +18,35 @@
     <header class="site-header">
       <div class="header-inner">
         <a href="index.html" class="site-logo">
-          <span class="heart-icon">💕</span>
-          Love Gallery
+          <span class="logo-cat">🐱</span>
+          Neko Gallery
         </a>
         <nav class="nav-links">
-          <a href="index.html" class="nav-link">← Gallery</a>
+          <a href="index.html" class="nav-link">← Back to Gallery</a>
         </nav>
       </div>
     </header>
 
-    <!-- ─── Login Form ─── -->
+    <!-- ─── Login Card ─── -->
     <div class="auth-page">
       <div class="auth-card">
 
-        <div class="auth-logo">Love Gallery</div>
-        <p class="auth-tagline">Admin Portal — Your special place ✨</p>
-        <div class="auth-hearts">💗 &nbsp; 💕 &nbsp; 💖</div>
+        <div class="auth-logo">Neko Admin 🐾</div>
+        <p class="auth-tagline">Your cozy admin portal ✨</p>
+
+        <!-- Bouncing cats -->
+        <div class="auth-hearts">
+          <span>🐱</span>
+          <span>🐾</span>
+          <span>😸</span>
+        </div>
 
         <!-- Alert -->
         <div class="alert alert-error hidden" id="login-alert" role="alert"></div>
 
         <form id="login-form" novalidate>
           <div class="form-group">
-            <label class="form-label" for="email">Email Address</label>
+            <label class="form-label" for="email">🐾 Email Address</label>
             <input
               type="email"
               id="email"
@@ -52,7 +58,7 @@
           </div>
 
           <div class="form-group">
-            <label class="form-label" for="password">Password</label>
+            <label class="form-label" for="password">🔒 Password</label>
             <input
               type="password"
               id="password"
@@ -63,17 +69,27 @@
             />
           </div>
 
-          <button type="submit" class="btn btn-primary" id="login-btn" style="width:100%;justify-content:center;margin-top:0.5rem">
-            ✨ Sign In
+          <button
+            type="submit"
+            class="btn btn-primary"
+            id="login-btn"
+            style="width:100%;justify-content:center;margin-top:0.5rem"
+          >
+            🐾 Sign In
           </button>
         </form>
 
-        <div style="margin-top:1.5rem;font-size:0.8rem;color:var(--text-light);font-family:'Dancing Script',cursive;font-size:1rem">
-          Only for authorized admins 🌸
-        </div>
+        <p style="margin-top:1.5rem;font-family:'Pacifico',cursive;font-size:0.95rem;color:var(--text-muted)">
+          Only for authorized admins 🐱
+        </p>
 
-        <a href="index.html" style="display:block;margin-top:1rem;font-size:0.85rem;color:var(--text-light);text-decoration:none;transition:all 0.2s" onmouseover="this.style.color='var(--pink-deep)'" onmouseout="this.style.color='var(--text-light)'">
-          ← Back to the gallery
+        <a
+          href="index.html"
+          style="display:block;margin-top:0.8rem;font-size:0.85rem;font-weight:700;color:var(--text-light);text-decoration:none;transition:color 0.2s"
+          onmouseover="this.style.color='var(--cat-rose)'"
+          onmouseout="this.style.color='var(--text-light)'"
+        >
+          🐾 Back to the gallery
         </a>
 
       </div>
@@ -81,7 +97,6 @@
 
   </div>
 
-  <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="app.js"></script>
 </body>
